@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import spotifyLogo from '../assets/spotify_logo.png';
 
 const Login = () => {
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [showSignup, setShowSignup] = useState(false);
-    const [sampleAccounts, setSampleAccounts] = useState([]);
+    // const [sampleAccounts, setSampleAccounts] = useState([]);
     
-    const { login, signup, getSampleAccounts } = useAuth();
+    // const { login, signup, getSampleAccounts } = useAuth();
+    const { login, signup} = useAuth();
 
-    useEffect(() => {
-        const fetchSampleAccounts = async () => {
-            const accounts = await getSampleAccounts();
-            setSampleAccounts(accounts);
-        };
-        fetchSampleAccounts();
-    }, [getSampleAccounts]);
+    // useEffect(() => {
+    //     const fetchSampleAccounts = async () => {
+    //         const accounts = await getSampleAccounts();
+    //         setSampleAccounts(accounts);
+    //     };
+    //     fetchSampleAccounts();
+    // }, [getSampleAccounts]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,7 +28,7 @@ const Login = () => {
         setError('');
 
         const result = showSignup 
-            ? await signup(email, password, password, 'user') // Using email as username for demo
+            ? await signup(username, email, password, 'user') // Using email as username for demo
             : await login(email, password);
 
         if (!result.success) {
@@ -36,10 +38,10 @@ const Login = () => {
         setIsLoading(false);
     };
 
-    const fillSampleAccount = (account) => {
-        setEmail(account.email);
-        setPassword(account.password);
-    };
+    // const fillSampleAccount = (account) => {
+    //     setEmail(account.email);
+    //     setPassword(account.password);
+    // };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center p-4">
@@ -56,7 +58,7 @@ const Login = () => {
                 </div>
 
                 {/* Sample Accounts Info */}
-                {!showSignup && sampleAccounts.length > 0 && (
+                {/* {!showSignup && sampleAccounts.length > 0 && (
                     <div className="mb-6 p-4 bg-gray-50 rounded-lg">
                         <h3 className="text-sm font-semibold text-gray-700 mb-2">Sample Accounts:</h3>
                         <div className="space-y-2">
@@ -73,7 +75,7 @@ const Login = () => {
                             ))}
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -84,8 +86,8 @@ const Login = () => {
                             </label>
                             <input
                                 type="text"
-                                value={email} // Using email as username for demo
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={username} // Using email as username for demo
+                                onChange={(e) => setUsername(e.target.value)}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                 placeholder="Enter username"
                                 required
@@ -121,6 +123,7 @@ const Login = () => {
                         />
                     </div>
 
+                    {/* Error message */}
                     {error && (
                         <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
                             <p className="text-red-600 text-sm">{error}</p>
