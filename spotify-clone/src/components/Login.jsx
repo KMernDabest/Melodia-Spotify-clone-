@@ -9,37 +9,40 @@ const Login = () => {
     const [error, setError] = useState('');
     const [showSignup, setShowSignup] = useState(false);
     const [sampleAccounts, setSampleAccounts] = useState([]);
+    const [username, setUsername] = useState('');
     
-    const { login, signup, getSampleAccounts } = useAuth();
+    // Remove sample accounts logic
+    // const { login, signup, getSampleAccounts } = useAuth();
+    const { login, signup } = useAuth();
 
     useEffect(() => {
-        const fetchSampleAccounts = async () => {
-            const accounts = await getSampleAccounts();
-            setSampleAccounts(accounts);
-        };
-        fetchSampleAccounts();
-    }, [getSampleAccounts]);
+        // Remove fetching sample accounts
+        // const fetchSampleAccounts = async () => {
+        //     const accounts = await getSampleAccounts();
+        //     setSampleAccounts(accounts);
+        // };
+        // fetchSampleAccounts();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
         setError('');
 
-        const result = showSignup 
-            ? await signup(email, password, password, 'user') // Using email as username for demo
-            : await login(email, password);
+        let result;
+        if (showSignup) {
+            result = await signup(username, email, password, 'user');
+        } else {
+            result = await login(email, password);
+        }
 
         if (!result.success) {
             setError(result.message);
         }
-        
         setIsLoading(false);
     };
 
-    const fillSampleAccount = (account) => {
-        setEmail(account.email);
-        setPassword(account.password);
-    };
+    // Remove fillSampleAccount and sample accounts display
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center p-4">
@@ -56,24 +59,7 @@ const Login = () => {
                 </div>
 
                 {/* Sample Accounts Info */}
-                {!showSignup && sampleAccounts.length > 0 && (
-                    <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                        <h3 className="text-sm font-semibold text-gray-700 mb-2">Sample Accounts:</h3>
-                        <div className="space-y-2">
-                            {sampleAccounts.map((account, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => fillSampleAccount(account)}
-                                    className="w-full text-left p-2 text-xs bg-white border border-gray-200 rounded hover:bg-gray-50 transition-colors"
-                                >
-                                    <div className="font-medium">{account.role === 'admin' ? '👑 Admin' : '👤 User'}</div>
-                                    <div className="text-gray-600">{account.email}</div>
-                                    <div className="text-gray-500">Password: {account.password}</div>
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                {/* Removed sample accounts display */}
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -84,8 +70,8 @@ const Login = () => {
                             </label>
                             <input
                                 type="text"
-                                value={email} // Using email as username for demo
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                 placeholder="Enter username"
                                 required

@@ -9,15 +9,16 @@ const AdminLogin = () => {
     const [error, setError] = useState('');
     const [sampleAccounts, setSampleAccounts] = useState([]);
     
-    const { login, getSampleAccounts } = useAuth();
+    const { login } = useAuth();
 
     useEffect(() => {
-        const fetchSampleAccounts = async () => {
-            const accounts = await getSampleAccounts();
-            setSampleAccounts(accounts);
-        };
-        fetchSampleAccounts();
-    }, [getSampleAccounts]);
+        // Remove fetching sample accounts
+        // const fetchSampleAccounts = async () => {
+        //     const accounts = await getSampleAccounts();
+        //     setSampleAccounts(accounts);
+        // };
+        // fetchSampleAccounts();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,10 +34,7 @@ const AdminLogin = () => {
         setIsLoading(false);
     };
 
-    const fillSampleAccount = (account) => {
-        setEmail(account.email);
-        setPassword(account.password);
-    };
+    // Remove fillSampleAccount and sample accounts display
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-600 via-green-700 to-green-800 flex items-center justify-center p-4">
@@ -53,24 +51,7 @@ const AdminLogin = () => {
                 </div>
 
                 {/* Sample Admin Account Info */}
-                {sampleAccounts.length > 0 && (
-                    <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                        <h3 className="text-sm font-semibold text-blue-800 mb-2">Sample Admin Account:</h3>
-                        <div className="space-y-2">
-                            {sampleAccounts.map((account, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => fillSampleAccount(account)}
-                                    className="w-full text-left p-3 text-sm bg-white border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors"
-                                >
-                                    <div className="font-medium text-blue-800">👑 Admin Account</div>
-                                    <div className="text-blue-600">{account.email}</div>
-                                    <div className="text-blue-500">Password: {account.password}</div>
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                {/* Removed sample admin accounts display */}
 
                 {/* Login Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">

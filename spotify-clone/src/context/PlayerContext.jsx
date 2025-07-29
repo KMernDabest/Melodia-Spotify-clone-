@@ -56,8 +56,7 @@ const PlayerContextProvider = (props) => {
         if (queue[index]) {
             setTrack(queue[index]);
             setCurrentQueueIndex(index);
-            audioRef.current.play();
-            setPlayStatus(true);
+            setPlayStatus(true); // Only set playStatus, let useEffect handle play()
         }
     }
 
@@ -197,6 +196,14 @@ const PlayerContextProvider = (props) => {
             audioRef.current.volume = volume;
         }
     }, [volume, audioRef])
+
+    // Play audio when track changes and playStatus is true
+    useEffect(() => {
+        if (audioRef.current && playStatus && track) {
+            audioRef.current.load(); // Ensure the new src is loaded
+            audioRef.current.play();
+        }
+    }, [track, playStatus]);
 
     const contextValue = {
         audioRef,
