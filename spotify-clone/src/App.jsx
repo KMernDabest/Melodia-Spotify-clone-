@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import Sidebar from './components/Sidebar'
 import Player from './components/Player'
 import Display from './components/Display'
@@ -47,7 +47,7 @@ const App = () => {
       <div className="absolute top-4 right-4 z-50 flex items-center space-x-4">
         <div className="text-white text-sm">
           Welcome, <span className="font-semibold">{user.username}</span>
-          {user.role === 'admin' && <span className="ml-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs">Admin</span>}
+          {user.role === 'admin' && <span className="ml-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs">Artist</span>}
         </div>
         <button
           onClick={logout}
