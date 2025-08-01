@@ -5,10 +5,10 @@ import userModel from '../models/userModel.js';
 // Hardcoded sample accounts
 const SAMPLE_ACCOUNTS = [
     {
-        username: 'admin',
+        username: 'artist',
         email: 'admin@spotify.com',
         password: 'admin123',
-        role: 'admin'
+        role: 'artist'
     },
     {
         username: 'user1',

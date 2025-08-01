@@ -9,54 +9,32 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [showSignup, setShowSignup] = useState(false);
-<<<<<<< HEAD
-    const [sampleAccounts, setSampleAccounts] = useState([]);
-    const [username, setUsername] = useState('');
+    // const [sampleAccounts, setSampleAccounts] = useState([]);
     
     // Remove sample accounts logic
     // const { login, signup, getSampleAccounts } = useAuth();
     const { login, signup } = useAuth();
 
-    useEffect(() => {
-        // Remove fetching sample accounts
-        // const fetchSampleAccounts = async () => {
-        //     const accounts = await getSampleAccounts();
-        //     setSampleAccounts(accounts);
-        // };
-        // fetchSampleAccounts();
-    }, []);
-=======
-    // const [sampleAccounts, setSampleAccounts] = useState([]);
-    
-    // const { login, signup, getSampleAccounts } = useAuth();
-    const { login, signup} = useAuth();
-
     // useEffect(() => {
+    //     Remove fetching sample accounts
     //     const fetchSampleAccounts = async () => {
     //         const accounts = await getSampleAccounts();
     //         setSampleAccounts(accounts);
     //     };
     //     fetchSampleAccounts();
-    // }, [getSampleAccounts]);
->>>>>>> 5e6e4eedbe1ae5f20121488d46e630361d5a08ee
+    // }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
         setError('');
 
-<<<<<<< HEAD
         let result;
         if (showSignup) {
             result = await signup(username, email, password, 'user');
         } else {
             result = await login(email, password);
         }
-=======
-        const result = showSignup 
-            ? await signup(username, email, password, 'user') // Using email as username for demo
-            : await login(email, password);
->>>>>>> 5e6e4eedbe1ae5f20121488d46e630361d5a08ee
 
         if (!result.success) {
             setError(result.message);
@@ -64,14 +42,7 @@ const Login = () => {
         setIsLoading(false);
     };
 
-<<<<<<< HEAD
     // Remove fillSampleAccount and sample accounts display
-=======
-    // const fillSampleAccount = (account) => {
-    //     setEmail(account.email);
-    //     setPassword(account.password);
-    // };
->>>>>>> 5e6e4eedbe1ae5f20121488d46e630361d5a08ee
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center p-4">
@@ -88,28 +59,7 @@ const Login = () => {
                 </div>
 
                 {/* Sample Accounts Info */}
-<<<<<<< HEAD
                 {/* Removed sample accounts display */}
-=======
-                {/* {!showSignup && sampleAccounts.length > 0 && (
-                    <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                        <h3 className="text-sm font-semibold text-gray-700 mb-2">Sample Accounts:</h3>
-                        <div className="space-y-2">
-                            {sampleAccounts.map((account, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => fillSampleAccount(account)}
-                                    className="w-full text-left p-2 text-xs bg-white border border-gray-200 rounded hover:bg-gray-50 transition-colors"
-                                >
-                                    <div className="font-medium">{account.role === 'admin' ? '👑 Admin' : '👤 User'}</div>
-                                    <div className="text-gray-600">{account.email}</div>
-                                    <div className="text-gray-500">Password: {account.password}</div>
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                )} */}
->>>>>>> 5e6e4eedbe1ae5f20121488d46e630361d5a08ee
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -120,11 +70,7 @@ const Login = () => {
                             </label>
                             <input
                                 type="text"
-<<<<<<< HEAD
                                 value={username}
-=======
-                                value={username} // Using email as username for demo
->>>>>>> 5e6e4eedbe1ae5f20121488d46e630361d5a08ee
                                 onChange={(e) => setUsername(e.target.value)}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                 placeholder="Enter username"

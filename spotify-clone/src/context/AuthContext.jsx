@@ -129,7 +129,8 @@ export const AuthProvider = ({ children }) => {
         logout,
         getSampleAccounts,
         isAuthenticated: !!user,
-        isAdmin: user?.role === 'admin'
+        // isAdmin: user?.role === 'admin'
+        isAdmin: user?.role === 'artist'
     };
 
     return (
